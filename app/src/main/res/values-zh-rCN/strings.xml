@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">伪蓝牙连接</string>
+    <string name="module_description">让作用域内应用始终认为已连接蓝牙 A2DP 设备。</string>
+</resources>

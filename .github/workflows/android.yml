@@ -1,0 +1,106 @@
+name: Android CI
+
+on:
+  push:
+    branches:
+      - '**'
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: android-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Generate debug keystore
+        run: |
+          mkdir -p ~/.android
+          keytool -genkeypair \
+            -v \
+            -storetype PKCS12 \
+            -keystore ~/.android/debug.keystore \
+            -storepass android \
+            -keypass android \
+            -alias androiddebugkey \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 10000 \
+            -dname "CN=Android Debug,O=Android,C=US"
+
+      - name: Decode release keystore
+        shell: bash
+        env:
+          ANDROID_RELEASE_KEYSTORE_BASE64: ${{ secrets.ANDROID_RELEASE_KEYSTORE_BASE64 }}
+          ANDROID_RELEASE_KEY_ALIAS: ${{ secrets.ANDROID_RELEASE_KEY_ALIAS }}
+          ANDROID_RELEASE_STORE_PASSWORD: ${{ secrets.ANDROID_RELEASE_STORE_PASSWORD }}
+          ANDROID_RELEASE_KEY_PASSWORD: ${{ secrets.ANDROID_RELEASE_KEY_PASSWORD }}
+        run: |
+          KEYSTORE_PATH="$RUNNER_TEMP/liuran001-release.jks"
+          printf '%s' "$ANDROID_RELEASE_KEYSTORE_BASE64" | base64 --decode > "$KEYSTORE_PATH"
+          chmod 600 "$KEYSTORE_PATH"
+          {
+            echo "SIGNING_STORE_FILE=$KEYSTORE_PATH"
+            echo "SIGNING_KEY_ALIAS=$ANDROID_RELEASE_KEY_ALIAS"
+            echo "SIGNING_STORE_PASSWORD=$ANDROID_RELEASE_STORE_PASSWORD"
+            echo "SIGNING_KEY_PASSWORD=$ANDROID_RELEASE_KEY_PASSWORD"
+          } >> "$GITHUB_ENV"
+          echo "::add-mask::$ANDROID_RELEASE_KEY_ALIAS"
+          echo "::add-mask::$ANDROID_RELEASE_STORE_PASSWORD"
+          echo "::add-mask::$ANDROID_RELEASE_KEY_PASSWORD"
+
+      - name: Checkout libxposed api
+        uses: actions/checkout@v4
+        with:
+          repository: libxposed/api
+          ref: master
+          path: libxposed-api
+
+      - name: Publish libxposed api to Maven local
+        working-directory: libxposed-api
+        run: ./gradlew publishToMavenLocal
+
+      - name: Build debug and release APK
+        run: ./gradlew clean assembleDebug assembleRelease --stacktrace
+
+      - name: Collect APKs
+        run: |
+          mkdir -p dist
+          cp app/build/outputs/apk/debug/app-debug.apk "dist/app-debug.apk"
+          cp app/build/outputs/apk/release/app-release.apk "dist/app-release.apk"
+
+      - name: Upload APK artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: fake-bluetooth-connect-${{ github.ref_name }}
+          path: dist/*.apk
+          if-no-files-found: error
+
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: dist/*.apk
