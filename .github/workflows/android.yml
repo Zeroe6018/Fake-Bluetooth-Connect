@@ -71,17 +71,6 @@ jobs:
           echo "::add-mask::$ANDROID_RELEASE_STORE_PASSWORD"
           echo "::add-mask::$ANDROID_RELEASE_KEY_PASSWORD"
 
-      - name: Checkout libxposed api
-        uses: actions/checkout@v4
-        with:
-          repository: libxposed/api
-          ref: master
-          path: libxposed-api
-
-      - name: Publish libxposed api to Maven local
-        working-directory: libxposed-api
-        run: ./gradlew publishToMavenLocal
-
       - name: Build debug and release APK
         run: ./gradlew clean assembleDebug assembleRelease --stacktrace
 

@@ -35,7 +35,7 @@ The goal is to let some music apps enable external lyric display features even w
 This project uses:
 
 - Android Studio / Gradle
-- LSPosed modern API (`libxposed`)
+- legacy Xposed API 82 (compatible with LSPosed legacy module loading)
 - Kotlin
 
 ## License
@@ -81,7 +81,7 @@ MIT
 项目使用：
 
 - Android Studio / Gradle
-- LSPosed modern API（`libxposed`）
+- legacy Xposed API 82（通过 LSPosed 的 legacy 模块兼容路径加载）
 - Kotlin
 
 ## 协议

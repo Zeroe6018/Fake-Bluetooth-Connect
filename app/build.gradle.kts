@@ -83,7 +83,6 @@ android {
 
     packaging {
         resources {
-            merges += "META-INF/xposed/*"
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
@@ -96,5 +95,5 @@ kotlin {
 }
 
 dependencies {
-    compileOnly("io.github.libxposed:api:100")
+    compileOnly("de.robv.android.xposed:api:82")
 }

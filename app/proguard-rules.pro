@@ -1,14 +1,6 @@
--adaptresourcefilecontents META-INF/xposed/java_init.list
+-adaptresourcefilecontents assets/xposed_init
 
 -keep class io.github.liuran001.fakebluetoothconnect.ModuleMain {
-    public <init>(...);
-    public void onPackageLoaded(...);
-}
-
--keep class * implements io.github.libxposed.api.XposedInterface$Hooker
-
--keepclassmembers class * implements io.github.libxposed.api.XposedInterface$Hooker {
-    public static void before(...);
-    public static void after(...);
-    public static java.lang.Object replace(...);
+    public <init>();
+    public void handleLoadPackage(...);
 }
